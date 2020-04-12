@@ -1,0 +1,329 @@
+"0","# This is the last type
+MPexp2013.v <- MPexp2013 %>% rbind.fill.matrix() %>% as.data.frame()
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+MPexp2013.v <- data.frame(lapply(MPexp2013.v, as.character), stringsAsFactors = FALSE) # fix string as factors
+# Remove total row for those special cases
+MPexp2013.v[MPexp2013.v[, 1] == ""Total"", ] <- NA
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+MPexp2013.v <- data.frame(lapply(MPexp2013.v, as.character), stringsAsFactors = FALSE) # fix string as factors
+# To check
+# for (i in seq(from = 1, to = nrow(MPexp2012.v), by = 28)){MPexp2012.v[i,1] %>% data.frame(i, .) %>% print()}
+for (i in 1:9342) {
+  if (MPexp2013.v[i, 1] == """" & grepl(MPexp2013.v[i, 2], ""Budgets"") & MPexp2013.v[i, 4] != """") {
+    MPexp2013.v[i, ] <- NA
+  }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+  if (MPexp2013.v[i, 2] == """" & MPexp2013.v[i, 3] == """" & MPexp2013.v[i, 4] == ""Constituency name"") {
+    MPexp2013.v[seq(from = i, to = i + 1, by = 1), 3:5] <- MPexp2013.v[seq(from = i, to = i + 1, by = 1), 4:6]
+  }
+}
+for (i in 1:9048) {
+  if (grepl(""^\\S+\\s+"", MPexp2013.v[i, 3]) & grepl(""\\d"", MPexp2013.v[i, 3]) & !grepl(""-"", MPexp2013.v[i, 3])) {
+    a <- MPexp2013.v[i, 3] %>% strsplit("" "")
+    MPexp2013.v[i, 3] <- a[[1]][1]
+    MPexp2013.v[i, 4] <- a[[1]][2]
+  }
+}
+#Intervals of 28
+for (i in 1:9048) {
+    if (MPexp2013.v[i,1] == """" & MPexp2013.v[i,2] == """"){
+     MPexp2013.v[i-1, 3] <- paste(MPexp2013.v[i-1, 3], MPexp2013.v[i, 3])
+     MPexp2013.v[i,] <- NA
+    }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+  if (MPexp2013.v[i,1] == """" & grepl(""Budgets"",MPexp2013.v[i,2]) & grepl(""the House"", MPexp2013.v[i,3])) {
+    MPexp2013.v[i,] <- NA
+  }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+    if (MPexp2013.v[i,1] %>% grepl(""From"", .)) {
+        MPexp2013.v[i,] <- NA
+    }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+  if (MPexp2013.v[i, 1] %>% grepl(""March"", .) | MPexp2013.v[i, 1] %>% grepl(""^[0-9 ]+$"", .)) {
+    MPexp2013.v[i, ] <- NA
+  }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+    
+    if (MPexp2013.v[i,1] %>% grepl(""2013"", .)){
+      MPexp2013.v[i,] <- NA
+    }
+    
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+for (i in 1:9048) {
+    
+    if (MPexp2013.v[i,1] %>% grepl(""2014"", .)) {
+       MPexp2013.v[i,] <- NA
+    }
+}
+# Get rid of NAs
+MPexp2013.v[is.na(MPexp2013.v)] <- """"
+# Drop rows that are completely empty
+MPexp2013.v <- MPexp2013.v[!apply(MPexp2013.v == """", 1, all), ]
+# for (i in seq(from = 1, to = 9048, by = 28)) {
+# 
+#   print( MPexp2013.v[i,])
+# 
+#   }
+for (i in 1:8960) {
+    
+    if (MPexp2013.v[i,2] != """") {
+      MPexp2013.v[i,6] <- MPexp2013.v[i,5]
+      MPexp2013.v[i,5] <- MPexp2013.v[i,4]
+      MPexp2013.v[i,4] <- MPexp2013.v[i,3]
+      MPexp2013.v[i,3] <- MPexp2013.v[i,2]
+    }
+    
+}
+#Drop second column
+MPexp2013.v <- MPexp2013.v[,-2]  
+#Remove commas
+for (j in 2:ncol(MPexp2013.v)) {
+  for (i in 1:8960){
+    MPexp2013.v[i,j] <- gsub("","", """", MPexp2013.v[i,j])
+  }
+}
+for (i in 1:8960){
+    if( grepl(""- [[:digit:]]"",MPexp2013.v[i,3]) & MPexp2013.v[i,2] == """") {
+    MPexp2013.v[i,3] <- str_extract(MPexp2013.v[i,3], ""[[:digit:]]+\\.*[[:digit:]]*"")
+    MPexp2013.v[i,2] <- c(""-"")
+    MPexp2013.v[i,4] <- c(""-"")
+        }
+}
+for (i in 1:8960) {
+  if(grepl(""- [[:digit:]]"",MPexp2013.v[i,2])){
+     MPexp2013.v[i,3] <- str_extract(MPexp2013.v[i,2], ""[[:digit:]]+\\.*[[:digit:]]*"")
+     MPexp2013.v[i,2] <- c("""")
+  }
+}
+for (i in 1:8960) {
+  if(grepl(""[[:digit:]] -"",MPexp2013.v[i,2])){
+     MPexp2013.v[i,2] <- str_extract(MPexp2013.v[i,2], ""[[:digit:]]+\\.*[[:digit:]]*"")
+     MPexp2013.v[i,3] <- c(""-"")
+  }
+}
+datalist = list()
+for (i in seq(from = 1 , to = nrow(MPexp2013.v), by =28)) {
+  
+  j <- i+1  #2
+  k <- i+2  #3
+  l <- i+27 #28
+  
+  a <- cbind(
+    rbind(MPexp2013.v[i:j, 1:5],c(MPexp2013.v[j,1],"""","""","""",""""),c(MPexp2013.v[j,1],"""","""","""",""""),c(MPexp2013.v[j,1],"""","""","""","""")),
+          MPexp2013.v[k:l,] %>% transpose()
+  )
+  datalist[[i]] <- a 
+  
+}
+MPexp2013.f <- do.call(rbind, datalist)
+for (i in 1:ncol(MPexp2013.f)) {
+  colnames(MPexp2013.f)[i] <- (paste(""C"", i, sep = """"))
+}
+for (i in 1:nrow(MPexp2013.f)) {
+  for (j in 7:ncol(MPexp2013.f)){
+    MPexp2013.f[i,j] <- gsub(""-"", ""0"", MPexp2013.f[i,j])
+  }
+}
+for (i in 1:nrow(MPexp2013.f)) {
+  for (j in 7:ncol(MPexp2013.f)){
+    if (MPexp2013.f[i,j] == """"){
+      MPexp2013.f[i,j] <- ""0""
+    }
+  }
+}
+for (i in 1:nrow(MPexp2013.f)) {
+  for (j in 7:ncol(MPexp2013.f)){
+    if (MPexp2013.f[i,j] == ""0 0""){
+      MPexp2013.f[i,j] <- ""0""
+    }
+  }
+}
+for (i in seq(from = 1, to = nrow(MPexp2013.f), by = 5)) {
+   for(j in 7:ncol(MPexp2013.f)){
+      MPexp2013.f[i+3,j] <- as.numeric(MPexp2013.f[i+1,j])+as.numeric(MPexp2013.f[i+2,j])
+ } 
+}
+"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"0","MPexp2013.f <- MPexp2013.f[,c(-5,-26)]"
+"0","for (i in 1:ncol(MPexp2013.f)) {"
+"0","  colnames(MPexp2013.f)[i] <- (paste(""C"", i, sep = """"))"
+"0","}"
+"0","MPexp2013.f <- MPexp2013.f[seq(from = -6, to = -1281, by = -5), ]"
+"0","MPexp2013.f <- MPexp2013.f[seq(from = -5, to = -1281, by = -4), ]"
+"0","MPexp2013.f <- MPexp2013.f[-1,]"
+"0","colnames(MPexp2013.f) <- c(""Member"",           #1"
+"0","                           ""Constituency name"",                                     #2"
+"0","                           ""Constituency size"",           #3"
+"0","                           ""Number of electors"",           #4"
+"0","                           ""Category"",           #5"
+"0","                           ""1-Employees' salaries and service contracts"",           #6"
+"0","                           ""2-Travel"",           #7"
+"0","                           ""Member"",           #8"
+"0","                           ""Designated traveller"",           #9"
+"0","                           ""Dependants"",           #10"
+"0","                           ""Employees"",           #11"
+"0","                           ""Member's accommodation and per diem expenses"",           #12"
+"0","                           ""Member's secondary residence expenses"",           #13"
+"0","                           ""3-Hospitality and events"",           #14"
+"0","                           ""4-Advertising"",           #15"
+"0","                           ""5-Printing"",           #16"
+"0","                           ""Householders"",           #17"
+"0","                           ""Ten percenters"",           #18"
+"0","                           ""Other printing-related expenses"",           #19"
+"0","                           ""6-Offices"",           #20"
+"0","                           ""Constituency office leases, insurance and utilities"",           #21"
+"0","                           ""Furniture, furnishing and equipment purchases"",           #22"
+"0","                           ""Equipment rentals"",           #23"
+"0","                           ""Informatics and telecommunication equipment purchases"",      #24"
+"0","                           ""Telecommunication services"",      #25"
+"0","                           ""Repairs and maintenance"",      #26"
+"0","                           ""Postage and courier services"",      #27"
+"0","                           ""Materials and supplies"",      #28"
+"0","                           ""Training"")      #29"
+"0","names <- c(""Member's Budgets ($)"", ""Resources Provided by the House ($)"", ""Total ($)"")"
+"0","for (i in seq(from = 1, to = nrow(MPexp2013.f), by = 3)) {"
+"0","  MPexp2013.f[i,5] <- names[1]"
+"0","  MPexp2013.f[i+1,5] <- names[1+1]"
+"0","  MPexp2013.f[i+2,5] <- names[1+2]"
+"0","}"
+"0","# Get rid of NAs"
+"0","MPexp2013.f[is.na(MPexp2013.f)] <- ""0"""
+"0","#Make table | use excel instead of csv since csv will split the name because of the comma"
+"0","setwd(""/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab"")"
+"2","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks."
+"0","write.xlsx(MPexp2013.f, ""MPexp2013.xlsx"")"
+"2","
+"

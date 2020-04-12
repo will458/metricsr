@@ -1,0 +1,14 @@
+Package: metricsr
+Type: Package
+Title: Wrappers for econometrics
+Version: 0.1.0
+Author: William Labasi-Sammartino
+Maintainer: The package maintainer <wgl2108@columbia.edu>
+Description: Set of wrapper functions to make common tasks in econometrics easier. 
+License: None
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

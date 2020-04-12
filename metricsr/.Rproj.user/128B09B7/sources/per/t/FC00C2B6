@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528820094365.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3134129207",
+    "id" : "FC00C2B6",
+    "lastKnownWriteTime" : 1528821590,
+    "last_content_update" : 1528821590828,
+    "path" : "~/Dropbox/R/metricsr/man/pcp.Rd",
+    "project_path" : "man/pcp.Rd",
+    "properties" : {
+        "cursorPosition" : "56,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}

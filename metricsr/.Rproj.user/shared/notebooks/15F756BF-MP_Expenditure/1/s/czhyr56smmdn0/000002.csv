@@ -1,0 +1,94 @@
+"0","```r
+#This is the last type
+MPexp2012.v <- MPexp2012 %>% rbind.fill.matrix() %>% as.data.frame()
+  #Get rid of NAs 
+MPexp2012.v[is.na(MPexp2012.v)] <- \"\"
+#Drop rows that are completely empty
+MPexp2012.v <- MPexp2012.v[!apply(MPexp2012.v == \"\", 1, all),]
+MPexp2012.v <- data.frame(lapply(MPexp2012.v, as.character), stringsAsFactors = FALSE) #fix string as factors
+#Remove total row for those special cases
+MPexp2012.v[MPexp2012.v[,1] == \"Total\",] <- NA
+  #Get rid of NAs 
+MPexp2012.v[is.na(MPexp2012.v)] <- \"\"
+#Drop rows that are completely empty
+MPexp2012.v <- MPexp2012.v[!apply(MPexp2012.v == \"\", 1, all),]
+MPexp2012.v <- data.frame(lapply(MPexp2012.v, as.character), stringsAsFactors = FALSE) #fix string as factors
+#To check
+#for (i in seq(from = 1, to = nrow(MPexp2012.v), by = 28)){MPexp2012.v[i,1] %>% data.frame(i, .) %>% print()}
+#Fix House ($) and Reg. Spec. USA
+for (i in seq(from = 1, to = nrow(MPexp2012.v), by = 28)){
+  MPexp2012.v[i+3,3]  <- NA
+  }
+for (i in seq(from = 1, to = nrow(MPexp2012.v), by = 28)){
+  MPexp2012.v[i+3,4]  <- NA
+  }
+  #Get rid of NAs 
+MPexp2012.v[is.na(MPexp2012.v)] <- \"\"
+#Drop rows that are completely empty
+MPexp2012.v <- MPexp2012.v[!apply(MPexp2012.v == \"\", 1, all),]
+MPexp2012.v <- data.frame(lapply(MPexp2012.v, as.character), stringsAsFactors = FALSE) #fix string as factors
+#Fix the Resources provided... header
+for (i in seq(from = 1, to = nrow(MPexp2012.v), by = 28)){
+  MPexp2012.v[i+2,3]  <- \"Resources Provided by the House ($)\"
+  }
+#Fix the total column
+ MPexp2012.v$X5 <- with( MPexp2012.v,ifelse(X5 == \"\",X6,X5))
+ MPexp2012.v <- MPexp2012.v[,-6]
+ 
+ 
+ #Make the final data frame
+ 
+datalist = list()
+for (i in seq(from = 1 , to = nrow(MPexp2012.v), by =27)) {
+  
+  j <- i+1  #2
+  k <- i+2  #3
+  l <- i+26 #27
+  
+  a <- cbind(
+    rbind(MPexp2012.v[i:j,], c(MPexp2012.v[j,1], \"\", \"\",\"\",\"\" ),c(MPexp2012.v[j,1], \"\", \"\",\"\",\"\" ),c(MPexp2012.v[j,1], \"\", \"\",\"\",\"\" )),
+                          MPexp2012.v[k:l,1:5] %>% transpose()
+    )
+  a <- a[, -c(8,17,21)]
+  datalist[[i]] <- a 
+  
+}
+MPexp2012.f <- do.call(rbind, datalist)
+ 
+#Final clean up
+colnames(MPexp2012.f) <- MPexp2012.f[1,]
+  #Get rid of headers and page numbers
+for (i in 1:nrow(MPexp2012.f)) {
+  if (any(c(\"STAFF AND\", \"Member\",\"(2)\",\"Travel Points\", \"EXPENSES\", \"CONSTITUENCY\", \"OFFICE\", \"SUPPLIES\") %in% MPexp2012.f[i, ])) {
+    MPexp2012.f[i, ] <- NA
+  }
+}
+  #Get rid of NAs 
+MPexp2012.f[is.na(MPexp2012.f)] <- \"\"
+#Drop rows that are completely empty
+MPexp2012.f <- MPexp2012.f[!apply(MPexp2012.f == \"\", 1, all),]
+#Remove ,
+for (i in 4:ncol(MPexp2012.f)){
+ MPexp2012.f[,i] = gsub(\"\\,\", \"\", MPexp2012.f[,i])
+}
+#Take out/replace lingering resources provided by the house..
+  #Replace - with 0
+MPexp2012.f[,7:ncol(MPexp2012.f)][MPexp2012.f[,7:ncol(MPexp2012.f)] == \"-\" | MPexp2012.f[,7:ncol(MPexp2012.f)] == \"Resources Provided by the House ($)\"]<- \"0\"
+MPexp2012.f[, 7:ncol(MPexp2012.f)] <- sapply(MPexp2012.f[, 7:ncol(MPexp2012.f)], as.numeric)
+for (i in seq(from = 2, to = nrow(MPexp2012.f), by = 3)){
+  
+  for (j in 7:ncol(MPexp2012.f)){
+   if (MPexp2012.f[i,j] == 0){
+     MPexp2012.f[i,j] <- MPexp2012.f[i+1,j]-MPexp2012.f[i-1,j]
+   }
+  }
+}
+# MPexp2012.f[MPexp2012.f$Training == \"Resources Provided by the House ($)\", ][,27] <- \"\"
+#Make table | use excel instead of csv since csv will split the name because of the comma
+setwd(\"/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab\")
+```"
+"1","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.
+"
+"0","```r
+write.xlsx(MPexp2012.f, \"MPexp2012.xlsx\")
+```"

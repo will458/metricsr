@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528557834391.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1296453753",
+    "id" : "334A598D",
+    "lastKnownWriteTime" : 1546878887,
+    "last_content_update" : 1546878887688,
+    "path" : "~/Dropbox/R/metricsr/man/f_test_model.Rd",
+    "project_path" : "man/f_test_model.Rd",
+    "properties" : {
+        "cursorPosition" : "49,17",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}

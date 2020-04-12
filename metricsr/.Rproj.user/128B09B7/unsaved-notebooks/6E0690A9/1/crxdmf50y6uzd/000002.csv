@@ -1,0 +1,113 @@
+"0","dic_individual_1981$var_list %>% "
+"0","  xtable() %>% "
+"0","  print(include.rownames = F,  tabular.environment = ""longtable"")"
+"1","\begin{longtable}{ll}
+  \hline
+var & key \\ 
+  \hline
+prov & Province \\ 
+  cma & Census metropolitan area \\ 
+  hhclass & Household: classification \\ 
+  htype & Household: type \\ 
+  hhsize & Household: number of persons \\ 
+  hhinc & Household: total income group \\ 
+  omp & Owner: average major monthly shelter payment \\ 
+  grosrt & Tenant: average monthly gross rent \\ 
+  rent & Tenant: regular monthly cash rent payment \\ 
+  efstat & Economic family: status \\ 
+  efsize & Economic family: number of persons \\ 
+  cfstat & Census family: status and living arrangements \\ 
+  cfsize & Census family: number of persons \\ 
+  mscfinc & Census family: major source of income \\ 
+  cfinc & Census family: total income group \\ 
+  hhstat & Household: relationship to reference person \\ 
+  age & Age (85=85+) \\ 
+  brthyr & Year of birth (1896=1896 or earlier) \\ 
+  mthb2 & Month of birth \\ 
+  sex & Sex \\ 
+  marst & Marital status \\ 
+  agemar & Age at first marriage \\ 
+  yrmar & Year of first marriage \\ 
+  mthmar & Month of first marriage \\ 
+  babies & Number of children ever born alive \\ 
+  powloc & Place of work \\ 
+  powstat & Place of work status \\ 
+  mob5 & Mobility: residence 5 years ago \\ 
+  pr5 & Mobility: province of residence 5 years ago \\ 
+  lfact71 & Labour force activity: 1971 definition \\ 
+  lfact & Labour force activity: 1981 definition \\ 
+  hrswk & Hours worked in reference week \\ 
+  lstwk & Period last worked \\ 
+  wkswk & Weeks worked in 1980 \\ 
+  fptwk & Full-time/part-time weeks worked in 1980 \\ 
+  presch & Household: presence of children \\ 
+  occ81 & Occupation: 1981 classification basis \\ 
+  occ71 & Occupation: 1971 classification basis \\ 
+  ind81 & Industry: 1981 basis \\ 
+  ind71 & Industry: comparable to 1971 basis \\ 
+  cow & Class of worker \\ 
+  attend & Education: attended school full-time/part-time \\ 
+  atype & Education: school attendance level \\ 
+  hlos & Education: highest level of schooling \\ 
+  hgrad & Education: highest level of elementary/secondary \\ 
+  psuv & Education: years of university \\ 
+  psot & Education: years of other non-university \\ 
+  trnuc & Education: trades/other non-university diplomas \\ 
+  dgree & Education: highest degree/certificate/diploma \\ 
+  relig & Religion \\ 
+  ethnicor & Ethnic origin \\ 
+  birthpla & Place of birth \\ 
+  offlang & Official language \\ 
+  homelang & Home language \\ 
+  mothertg & Mother tongue \\ 
+  citizens & Country of citizenship \\ 
+  yrimmig & Year of immigration \\ 
+  immigage & Age at immigration \\ 
+  totinc & Total income \\ 
+  wages & Wages and salaries \\ 
+  selfemp & Self-employment income \\ 
+  invst & Investment income \\ 
+  oasgi & Oas, gis and cpp/qpp benefits \\ 
+  famal & Family allowances \\ 
+  uicbn & Unemployment insurance benefits \\ 
+  govti & Other government transfers \\ 
+  retir & Retirement pensions/other money income \\ 
+  malfact & Husband/male lone parent: labour force activity \\ 
+  falfact & Wife/female lone parent: labour force activity \\ 
+  maocc81 & Husband/male lone parent: occupation - 1981 basis \\ 
+  faocc81 & Wife/female lone parent: occupation - 1981 basis \\ 
+  wkactma & Husband/male lone parent: work activity - 1980 \\ 
+  wkactfa & Wife/female lone parent: work activity - 1980 \\ 
+  hloshml & Husband/male lone parent: highest education \\ 
+  hloswfl & Wife/female lone parent: highest education \\ 
+  mothmlp & Husband/male lone parent: mother tongue \\ 
+  mothflp & Wife/female lone parent: mother tongue \\ 
+  marcomp & Comparison of date of first marriage of spouses \\ 
+  agehmlp & Husband/male lone parent: age \\ 
+  agewflp & Wife/female lone parent: age \\ 
+  hmain & Household maintainer: indicator \\ 
+  agehhm & Household maintainer: age \\ 
+  sexhhm & Household maintainer: sex \\ 
+  afmhhm & Household maintainer: age at first marriage \\ 
+  hstatmnr & Household maintainer: relationship to reference person \\ 
+  lschmntn & Household maintainer: highest education \\ 
+  mothm & Household maintainer: mother tongue \\ 
+  tenur & Household: tenure \\ 
+  rcond & Dwelling: condominium status \\ 
+  smdwel & Dwelling: seasonal/marginal status \\ 
+  dtype & Dwelling: structural type \\ 
+  rpair & Dwelling: condition \\ 
+  lnthr & Dwelling: length of occupancy \\ 
+  built & Dwelling: period of construction \\ 
+  vhome & Dwelling: value \\ 
+  heat & Dwelling: main type of heating equipment \\ 
+  fuelh & Dwelling: principal heating fuel \\ 
+  fuelw & Dwelling: principal water heating fuel \\ 
+  bathc & Dwelling: number of complete bathrooms \\ 
+  bathh & Dwelling: number of half bathrooms \\ 
+  room & Dwelling: number of rooms \\ 
+  peroom & Dwelling: number of persons per room \\ 
+   \hline
+\hline
+\end{longtable}
+"

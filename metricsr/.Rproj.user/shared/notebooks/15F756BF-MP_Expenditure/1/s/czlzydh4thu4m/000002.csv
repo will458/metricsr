@@ -1,0 +1,41 @@
+"0","```r
+MPexp2008 <- extract_tables(\"http://www.ourcommons.ca/Content/Boie/pdf/MembersExpenses-2008-2009-e.pdf\", 
+                            resolution = 100L, area = list(c( 96.68571, -165.08571 , 633.60000,  844.97143 )), 
+                            guess = F, pages = 5:68)
+MPexp2008.v <- MPexp2008 %>% rbind.fill.matrix() %>% as.data.frame()
+MPexp2008.v <- data.frame(lapply(MPexp2008.v, as.character), stringsAsFactors = FALSE)
+  #Get rid of headers and page numbers
+for (i in 1:nrow(MPexp2008.v)) {
+  if (any(c(\"STAFF AND\", \"MEMBER\",\"(2)\", \"EXPENSES\", \"CONSTITUENCY\", \"OFFICE\", \"SUPPLIES\") %in% MPexp2008.v[i, ])) {
+    MPexp2008.v[i, ] <- NA
+  }
+  if (any(grep(\"Page\", MPexp2007.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+  if (any(grep(\"Newly Elected\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+  if (any(grep(\"Deceased\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+  if (any(grep(\"Not Seeking\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+   if (any(grep(\"otherwise indicated\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+   }
+  if (any(grep(\"constituency listed\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+    if (any(grep(\"STATUS:\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+    }
+  if (any(grep(\"FURNITURE\", MPexp2008.v[i, ]))) {
+    MPexp2008.v[i, ] <- NA
+  }
+}
+  #Get rid of NAs 
+MPexp2008.v[is.na(MPexp2008.v)] <- \"\"
+#Drop rows that are completely empty
+MPexp2008.v <- MPexp2008.v[!apply(MPexp2008.v == \"\", 1, all),]
+```"

@@ -1,0 +1,18 @@
+"0","a <- describe(migrants %>% select(""totinc"", ""age"", ""wages"", ""uicbn"")) %>%"
+"0","  select(""n"", ""mean"", ""sd"", ""median"", ""min"", ""max"", ""range"", ""skew"")"
+"0","rownames(a) <- c(""Total Income"", ""Age (85=85+)"", ""Wages and salaries"", ""Unemp. benefits"")"
+"0","a %>% xtable()"
+"1","\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrrr}
+  \hline
+ & n & mean & sd & median & min & max & range & skew \\ 
+  \hline
+Total Income & 2924.00 & 14677.54 & 13634.26 & 11424.50 & -38318.00 & 99999.00 & 138317.00 & 1.95 \\ 
+  Age (85=85+) & 3991.00 & 30.98 & 17.05 & 28.00 & 5.00 & 85.00 & 80.00 & 0.82 \\ 
+  Wages and salaries & 2405.00 & 14815.91 & 12848.37 & 12000.00 & 45.00 & 98707.00 & 98662.00 & 1.66 \\ 
+  Unemp. benefits & 315.00 & 1887.85 & 1520.12 & 1540.00 & 18.00 & 8000.00 & 7982.00 & 1.21 \\ 
+   \hline
+\end{tabular}
+\end{table}
+"

@@ -1,0 +1,7 @@
+"0","```r
+num <- 2001:2016
+for (i in 14:16) {
+  name <- paste(\"MPexp\", num[i], sep = \"\")
+  assign(name, extract_tables(df$URL_path[i]))
+}
+```"

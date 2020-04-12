@@ -1,0 +1,4 @@
+"0","# 1981 individual"
+"0","md81_ind <- read.csv(""/Users/WilliamLS/Dropbox/Thesis/Raw Data/micro_data_1981/individual/AAo3IsBF.csv"")"
+"0","# 1976 individual"
+"0","md76_ind <- read.csv(""/Users/WilliamLS/Dropbox/Thesis/Raw Data/micro_data_1976/individual/AAMPXhrH.csv"")"

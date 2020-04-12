@@ -1,0 +1,25 @@
+"0","```r
+datalist = list()
+for (i in seq(from = 1 , to = nrow(MPexp2002v), by =2)) {
+  datalist[[i]] <- c(MPexp2002v[i,1],MPexp2002v[i+1,])
+}
+MPexp2002.f <- do.call(rbind, datalist)
+#Remove dollar signs
+MPexp2002.final <- MPexp2002.f
+for (i in 2:10){
+ MPexp2002.final[,i] = gsub(\"\\$\", \"\", MPexp2002.final[,i])
+}
+#Remove ,
+for (i in 2:10){
+ MPexp2002.final[,i] = gsub(\"\\,\", \"\", MPexp2002.final[,i])
+}
+#Make table | use excel instead of csv since csv will split the name because of the comma
+setwd(\"/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab\")
+
+```"
+"1","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.
+"
+"0","```r
+colnames(MPexp2002.final) <- c(\"Name\",\"Constituency\",\"StaffAndOtherExpense\", \"Travel\", \"OfficeLease\", \"Travel\", \"Telephone\", \"Printing\", \"OfficeSupplies\",\"Other\")
+write.xlsx(MPexp2002.final, \"MPexp2002.xlsx\")
+```"

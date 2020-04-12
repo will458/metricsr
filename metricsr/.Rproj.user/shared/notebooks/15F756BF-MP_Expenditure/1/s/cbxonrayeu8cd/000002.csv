@@ -1,0 +1,24 @@
+"0","```r
+  #Get rid of headers and page numbers
+for (i in 1:nrow(MPexp2011.f)) {
+  if (any(c(\"STAFF AND\", \"Member\",\"(2)\", \"EXPENSES\", \"CONSTITUENCY\", \"OFFICE\", \"SUPPLIES\") %in% MPexp2011.f[i, ])) {
+    MPexp2011.f[i, ] <- NA
+  }
+}
+  #Get rid of NAs 
+MPexp2011.f[is.na(MPexp2011.f)] <- \"\"
+#Drop rows that are completely empty
+MPexp2011.f <- MPexp2011.f[!apply(MPexp2011.f == \"\", 1, all),]
+#Remove ,
+for (i in 7:ncol(MPexp2011.f)){
+ MPexp2011.f[,i] = gsub(\"\\,\", \"\", MPexp2011.f[,i])
+}
+#Make table | use excel instead of csv since csv will split the name because of the comma
+setwd(\"/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab\")
+
+```"
+"1","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.
+"
+"0","```r
+write.xlsx(MPexp2010.f, \"MPexp2011.xlsx\")
+```"

@@ -1,0 +1,9 @@
+"0","```r
+setwd(\"/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab\")
+
+```"
+"1","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.
+"
+"0","```r
+write.xlsx(MPexp2009.f, \"MPexp2009.xlsx\")
+```"

@@ -1,0 +1,11 @@
+"0","```r
+#Make table | use excel instead of csv since csv will split the name because of the comma
+setwd(\"/Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab\")
+
+```"
+"1","The working directory was changed to /Users/WilliamLS/Dropbox/R/RA/Vinayak/FinalExpTab inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.
+"
+"0","```r
+colnames(MPexp2006.final) <- c(\"Name\",\"Constituency\",\"StaffAndOtherExpense\", \"Travel\", \"Advertising\",\"OfficeLease\", \"Travel\", \"Telephone\", \"Printing\", \"OfficeSupplies\",\"ConstituencyOfficeFurniture&EquipmentImprovementFund\",\"Other\")
+write.xlsx(MPexp2006.final, \"MPexp2006.xlsx\")
+```"

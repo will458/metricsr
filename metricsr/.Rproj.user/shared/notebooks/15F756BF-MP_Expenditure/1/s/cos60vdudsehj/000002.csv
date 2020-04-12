@@ -1,0 +1,9 @@
+"0","```r
+datalist = list()
+for (i in 1:12) {
+  datalist[[i]] <- c(MPexp2001.v[[i]][2,1], MPexp2001.v[[i]][3,1],  MPexp2001.v[[i]][3,2:length(MPexp2001.v[[i]][1,])])
+}
+MPexp2001.f <- do.call(rbind, datalist)
+```"
+"1","number of columns of result is not a multiple of vector length (arg 1)
+"

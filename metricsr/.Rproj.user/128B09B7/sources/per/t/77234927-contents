@@ -1,0 +1,264 @@
+#' @export
+as.lmr <- function(x) {
+  library(lmtest)
+  library(sandwich)
+  b <- coeftest(x, vcov. = vcovHC(x, "HC1"))
+  return(b)
+}
+
+#' @export
+as.lmr.nw <- function(x, truncation) {
+  library(lmtest)
+  library(sandwich)
+  b <- coeftest(x, vcov. = NeweyWest(x,
+    lag = truncation, prewhite = FALSE,
+    adjust = TRUE, verbose = TRUE
+  ))
+  return(b)
+}
+
+#' @export
+rmse <- function(m) {
+  summary(m)$sigma
+}
+
+#' @export
+r_squared <- function(m) {
+  round(summary(lm(model.frame(m)))$r.squared, 3)
+}
+
+#' @export
+adj_r_squared <- function(m) {
+  round(summary(lm(model.frame(m)))$adj.r.squared, 3)
+}
+
+#' @export
+qqplot.data <- function(vec) # argument: vector of numbers
+{
+  library(ggplot2)
+  # following four lines from base R's qqline()
+  y <- quantile(vec[!is.na(vec)], c(0.25, 0.75))
+  x <- qnorm(c(0.25, 0.75))
+  slope <- diff(y) / diff(x)
+  int <- y[1L] - slope * x[1L]
+  d <- data.frame(resids = vec)
+  ggplot(d, aes(sample = resids)) + stat_qq() + geom_abline(slope = slope, intercept = int)
+}
+
+#' @export
+f_test_model <- function(x) {
+  library(lmtest)
+  library(sandwich)
+  a <- waldtest(x, vcov = vcovHC(x, "HC1"))
+}
+
+#' @export
+f_test_model_stat <- function(x) {
+  library(lmtest)
+  library(sandwich)
+  a <- waldtest(x, vcov = vcovHC(x, "HC1"))
+  a <- a$F
+  a <- round(a[2], 3)
+}
+
+#' @export
+f_test_model_p <- function(x) {
+  library(lmtest)
+  library(sandwich)
+  a <- waldtest(x, vcov = vcovHC(x, "HC1"))
+  a <- a$`Pr(>F)`
+  a <- formatC(a[2], format = "e", digits = 2)
+}
+
+#' @export
+joint_test_stat <- function(x="full model (lm)", y= "Vector of variables that their coefficients
+                            that are being tested = 0.",
+                            fe = "this needs to be either ==0,==1, ==2, ==3, for none, individual, time, both respectively",
+                            fe.individual="must be string with the individual name, ex: state, country",
+                            fe.time= "must be string with time name, ex: year, day", cluster="logical",
+                            cluster_var = "var of the cluster with $") {
+  library(lmtest)
+  library(sandwich)
+  library(magrittr)
+  library(car)
+  library(multiwayvcov)
+  if (fe == 0) { # Cross section regression
+    a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+  } else {
+    if (fe == 1) { # Panel Data: individual fixed effects
+      a <- summary(x)$coefficients %>% row.names()
+      b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+      y <- grep(b, a, value = T)
+
+      if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+        g <- cluster.vcov(x, cluster_var)
+        a <- linearHypothesis(x, y, vcov = g)
+      } else {
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    } else {
+      if (fe == 2) { # Panel Data: time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        y <- grep(b, a, value = T)
+
+        if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+          g <- cluster.vcov(x, cluster_var)
+          a <- linearHypothesis(x, y, vcov = g)
+        } else {
+          a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+        }
+      } else { # Panel Data: individual and time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+        c <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        b.1 <- grep(b, a, value = T)
+        c.1 <- grep(c, a, value = T)
+        y <- c(b.1, c.1)
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    }
+  }
+  a <- a$F
+  a <- round(a[2], 3)
+}
+
+#' @export
+joint_test_p <- function(x="full model (lm)", y= "Vector of variables that their coefficients that are being tested = 0.",
+                         fe = "this needs to be either ==0,==1, ==2, ==3, for none, individual, time, both respectively",
+                         fe.individual="must be string with the individual name, ex: state, country",
+                         fe.time= "must be string with time name, ex: year, day",
+                         cluster="logical",
+                         cluster_var = "var of the cluster with $") {
+  library(lmtest)
+  library(sandwich)
+  library(magrittr)
+  library(car)
+  library(multiwayvcov)
+  if (fe == 0) { # Cross section regression
+    a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+  } else {
+    if (fe == 1) { # Panel Data: individual fixed effects
+      a <- summary(x)$coefficients %>% row.names()
+      b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+      y <- grep(b, a, value = T)
+
+      if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+        g <- cluster.vcov(x, cluster_var)
+        a <- linearHypothesis(x, y, vcov = g)
+      } else {
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    } else {
+      if (fe == 2) { # Panel Data: time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        y <- grep(b, a, value = T)
+
+        if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+          g <- cluster.vcov(x, cluster_var)
+          a <- linearHypothesis(x, y, vcov = g)
+        } else {
+          a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+        }
+      } else { # Panel Data: individual and time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+        c <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        b.1 <- grep(b, a, value = T)
+        c.1 <- grep(c, a, value = T)
+        y <- c(b.1, c.1)
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    }
+  }
+  a <- a$`Pr(>F)`
+  a <- a[2] %>% formatC(format = "e", digits = 2)
+}
+
+#' @export
+joint_test <- function(x="full model (lm)", y= "Vector of variables that their coefficients that are being tested = 0.",
+                       fe = "this needs to be either 0, 1, 2, 3, for none, individual, time, both respectively",
+                       fe.individual ="must be string with the individual name, ex: state, country",
+                       fe.time = "must be string with time name, ex: year, day",
+                       cluster = "logical",
+                       cluster_var = "var of the cluster with $") {
+  library(lmtest)
+  library(sandwich)
+  library(magrittr)
+  library(car)
+  library(multiwayvcov)
+  if (fe == 0) { # Cross section regression
+    a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+  } else {
+    if (fe == 1) { # Panel Data: individual fixed effects
+      a <- summary(x)$coefficients %>% row.names()
+      b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+      y <- grep(b, a, value = T)
+
+      if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+        g <- cluster.vcov(x, cluster_var)
+        a <- linearHypothesis(x, y, vcov = g)
+      } else {
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    } else {
+      if (fe == 2) { # Panel Data: time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        y <- grep(b, a, value = T)
+
+        if (isTRUE(cluster)) { # Robust SE cluster hypothesis test
+          g <- cluster.vcov(x, cluster_var)
+          a <- linearHypothesis(x, y, vcov = g)
+        } else {
+          a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+        }
+      } else { # Panel Data: individual and time fixed effects
+        a <- summary(x)$coefficients %>% row.names()
+        b <- paste("^factor", "\\(", fe.individual, "\\)", sep = "")
+        c <- paste("^factor", "\\(", fe.time, "\\)", sep = "")
+        b.1 <- grep(b, a, value = T)
+        c.1 <- grep(c, a, value = T)
+        y <- c(b.1, c.1)
+        a <- linearHypothesis(x, y, vcov = vcovHC(x, "HC1"))
+      }
+    }
+  }
+}
+
+#' @export
+reg_cluster <- function(m, cluster_var, deg_f = NULL) {
+  if (is.null(deg_f)) {
+    b <- tidyr::drop_na(get(as.character(m$call)[3]), names(m$model))
+    y <- length(unique(dplyr::pull(b, cluster_var))) - 1
+    a <- lmtest::coeftest(m, multiwayvcov::cluster.vcov(m, dplyr::select(get(as.character(m$call)[3]), cluster_var)), df = y)
+  } else {
+    a <- lmtest::coeftest(m, multiwayvcov::cluster.vcov(m, cluster_var), df = deg_f)
+  }
+  return(a)
+}
+
+#' @export
+pcp <- function(x, percent = T, round = 3) {
+  class <- class(x) == "glm"
+  if (class[1] == T) {
+    pdata <- predict(x, type = "response")
+    a <- caret::confusionMatrix(data = as.numeric(pdata > 0.5), reference = x$y)
+    a <- a$overall[1]
+  } else {
+    pdata <- predict(x, type = "response")
+    a <- caret::confusionMatrix(data = as.numeric(pdata > 0.5), reference = model.frame(x)[[1]])
+    a <- a$overall[1]
+  }
+  if (isTRUE(percent)) {
+    a <- a * 100
+  }
+  if (round == 3) {
+    a <- round(a, 3)
+  }
+  if (round != 3 & is.numeric(round)) {
+    a <- round(a, round)
+  }
+  return(a)
+}

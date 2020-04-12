@@ -1,0 +1,40 @@
+"0","dic_individual_1976$var_list %>% xtable() %>% print(include.rownames = F)"
+"1","\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \hline
+var & key \\ 
+  \hline
+ftype & File type indicator \\ 
+  prov & Province \\ 
+  cma & Census metropolitan area \\ 
+  pop5 & Population size group, 1971 \\ 
+  pop & Population size group, 1976 \\ 
+  rusizes & Rural/urban, 1976 \\ 
+  ruub5 & Rural/urban, 1971 \\ 
+  hhldclas & Household classification \\ 
+  hhdlrel & Household status \\ 
+  fammemb & Family status \\ 
+  famsize & Number of persons in family \\ 
+  age & Age \\ 
+  sex & Sex \\ 
+  usmarst & Marital status \\ 
+  usmothtg & Mother tongue \\ 
+  mtmp & Mother tongue of husband/male lone parent \\ 
+  mtfp & Mother tongue of wife or female lone parent \\ 
+  educat & Level of schooling \\ 
+  edump & Level of schooling of husband or male lone parent \\ 
+  edufp & Level of schooling of wife or female lone parent \\ 
+  attend & School attendance status \\ 
+  atype & Type of school attendance status \\ 
+  dgree & Educational qualifications \\ 
+  psuv & Post-secondary university \\ 
+  psnu & Post-secondary non-university \\ 
+  hgrad & Highest grade attended \\ 
+  lftag & Labour force activity (last week) \\ 
+  lf71x & Labour force activity (1971 definition) \\ 
+  mob5 & Mobility status \\ 
+   \hline
+\end{tabular}
+\end{table}
+"

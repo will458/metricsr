@@ -1,0 +1,23 @@
+"0","options(java.parameters = ""-Xmx2048m"")"
+"0","rm(list = ls()) ## Clear all"
+"0","library(tabulizer)"
+"0","library(plyr)"
+"0","library(magrittr)"
+"0","library(data.table)"
+"2","data.table 1.10.4.3
+"
+"2","**********
+This installation of data.table has not detected OpenMP support. It should still work but in single-threaded mode. If this is a Mac, please ensure you are using R>=3.4.0 and have installed the MacOS binary package from CRAN: see ?install.packages, the 'type=' argument and the 'Binary packages' section. If you compiled from source, please reinstall and precisely follow the installation instructions on the data.table homepage. This warning message should not occur on Windows or Linux. If it does and you've followed the installation instructions on the data.table homepage, please file a GitHub issue.
+**********
+"
+"2","  The fastest way to learn (by data.table authors): https://www.datacamp.com/courses/data-analysis-the-data-table-way
+"
+"2","  Documentation: ?data.table, example(data.table) and browseVignettes(""data.table"")
+"
+"2","  Release notes, videos and slides: http://r-datatable.com
+"
+"0","library(xlsx)"
+"2","Loading required package: rJava
+"
+"2","Loading required package: xlsxjars
+"

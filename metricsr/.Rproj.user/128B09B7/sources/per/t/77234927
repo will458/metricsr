@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528556866830.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1335998657",
+    "id" : "77234927",
+    "lastKnownWriteTime" : 1546878708,
+    "last_content_update" : 1546878708,
+    "path" : "~/Dropbox/R/metricsr/R/metricsr.R",
+    "project_path" : "R/metricsr.R",
+    "properties" : {
+        "cursorPosition" : "232,18",
+        "scrollLine" : "228"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

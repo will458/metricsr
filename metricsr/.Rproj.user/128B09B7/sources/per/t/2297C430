@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528557824625.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "505482110",
+    "id" : "2297C430",
+    "lastKnownWriteTime" : 1546878901,
+    "last_content_update" : 1546878901611,
+    "path" : "~/Dropbox/R/metricsr/man/reg_cluster.Rd",
+    "project_path" : "man/reg_cluster.Rd",
+    "properties" : {
+        "cursorPosition" : "18,70",
+        "scrollLine" : "8",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}
